@@ -1,0 +1,20 @@
+# Manufacturing files
+images
+production
+pcbway_production
+*.cam
+*.zip
+*.html
+
+# KiCad settings files
+*.kicad_prl
+*.json
+
+# Temp files
+*.lck
+*.bak
+fp-info-cache
+_autosave*
+
+# Explicitly include
+!*.pdf

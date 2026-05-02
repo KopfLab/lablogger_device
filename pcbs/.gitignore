@@ -11,6 +11,7 @@ pcbway_production
 *.json
 
 # Temp files
+.history
 *.lck
 *.bak
 fp-info-cache

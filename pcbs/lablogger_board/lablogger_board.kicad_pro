@@ -3,6 +3,8 @@
     "3dviewports": [],
     "design_settings": {
       "defaults": {
+        "apply_defaults_to_fp_barcodes": false,
+        "apply_defaults_to_fp_dimensions": false,
         "apply_defaults_to_fp_fields": false,
         "apply_defaults_to_fp_shapes": false,
         "apply_defaults_to_fp_text": false,
@@ -54,7 +56,15 @@
       "diff_pair_dimensions": [],
       "drc_exclusions": [
         [
-          "silk_over_copper|112104000|106277022|ecf7318b-59cc-4cb1-b929-530dd2552ab8|00000000-0000-0000-0000-000000000000",
+          "courtyards_overlap|159631000|103625400|8eb66302-864c-4ff2-b93c-c4e1f759afde|af3f1bad-9fa7-47b4-ada3-dd8ac94888e7",
+          ""
+        ],
+        [
+          "courtyards_overlap|159631000|114586735|af3f1bad-9fa7-47b4-ada3-dd8ac94888e7|ec74ba38-3b2b-43f0-b66b-e68018071a75",
+          ""
+        ],
+        [
+          "courtyards_overlap|159631000|95812300|292b7f59-c905-4bed-9954-400e7019d977|8eb66302-864c-4ff2-b93c-c4e1f759afde",
           ""
         ]
       ],
@@ -77,6 +87,7 @@
         "extra_footprint": "warning",
         "footprint": "error",
         "footprint_filters_mismatch": "ignore",
+        "footprint_symbol_field_mismatch": "warning",
         "footprint_symbol_mismatch": "warning",
         "footprint_type_mismatch": "ignore",
         "hole_clearance": "error",
@@ -94,6 +105,7 @@
         "mirrored_text_on_front_layer": "warning",
         "missing_courtyard": "ignore",
         "missing_footprint": "warning",
+        "missing_tuning_profile": "warning",
         "net_conflict": "warning",
         "nonmirrored_text_on_back_layer": "warning",
         "npth_inside_courtyard": "ignore",
@@ -113,9 +125,12 @@
         "too_many_vias": "error",
         "track_angle": "error",
         "track_dangling": "warning",
+        "track_not_centered_on_via": "ignore",
+        "track_on_post_machined_layer": "error",
         "track_segment_length": "error",
         "track_width": "error",
         "tracks_crossing": "error",
+        "tuning_profile_track_geometries": "ignore",
         "unconnected_items": "error",
         "unresolved_variable": "error",
         "via_dangling": "warning",
@@ -243,36 +258,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      [
-        "unconnected_wire_endpoint|1003300|419100|5927ab51-a74b-4058-9077-34b743448b40|00000000-0000-0000-0000-000000000000|/ba44af6b-d897-4c95-8815-b8860eb38091||",
-        ""
-      ],
-      [
-        "unconnected_wire_endpoint|1257300|1193800|d82a9601-8109-40a4-abef-60d6f4bb4e6a|00000000-0000-0000-0000-000000000000|/ba44af6b-d897-4c95-8815-b8860eb38091||",
-        ""
-      ],
-      [
-        "unconnected_wire_endpoint|1257300|1219200|377ba75d-57d6-4240-a6c8-82300e706f2f|00000000-0000-0000-0000-000000000000|/ba44af6b-d897-4c95-8815-b8860eb38091||",
-        ""
-      ],
-      [
-        "unconnected_wire_endpoint|1257300|914400|a91bfa63-a6f3-4313-aad5-84b090cdd2b9|00000000-0000-0000-0000-000000000000|/ba44af6b-d897-4c95-8815-b8860eb38091||",
-        ""
-      ],
-      [
-        "unconnected_wire_endpoint|1257300|939800|c06a6269-d6de-497a-9e4d-144b1574c87b|00000000-0000-0000-0000-000000000000|/ba44af6b-d897-4c95-8815-b8860eb38091||",
-        ""
-      ],
-      [
-        "unconnected_wire_endpoint|2616200|1371600|b525fbc6-f49f-46a7-bc4c-545d25776421|00000000-0000-0000-0000-000000000000|/ba44af6b-d897-4c95-8815-b8860eb38091||",
-        ""
-      ],
-      [
-        "unconnected_wire_endpoint|2616200|1397000|6ab59b1f-fb79-4c9c-a821-8bf06d183d76|00000000-0000-0000-0000-000000000000|/ba44af6b-d897-4c95-8815-b8860eb38091||",
-        ""
-      ]
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },
@@ -675,7 +661,7 @@
         "uuid": "ba44af6b-d897-4c95-8815-b8860eb38091"
       }
     ],
-    "used_designators": "U3-4,R20-23,C1-6,Q6,D3,#PWR3,#PWR17,#PWR21-22,#PWR25,#PWR32-45,J1,J5-9,J11",
+    "used_designators": "1Wire1",
     "variants": []
   },
   "sheets": [
@@ -686,7 +672,7 @@
   ],
   "text_variables": {
     "PROJ_AUTHOR": "Sebastian Kopf",
-    "PROJ_REV": "0.1",
+    "PROJ_REV": "0.2",
     "PROJ_TITLE": "labLogger Board"
   },
   "tuning_profiles": {

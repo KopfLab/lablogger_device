@@ -2623,7 +2623,7 @@
 					)
 				)
 			)
-			(property "Footprint" "footprints:Fuse_1812"
+			(property "Footprint" "footprints:Fuse_2920_7451"
 				(at 0 -7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -7798,7 +7798,7 @@
 					)
 				)
 			)
-			(property "Footprint" "footprints:TERMINAL_BLOCK_1x02V_5mm"
+			(property "Footprint" "footprints:TERMINAL_BLOCK_1x02_5mm_vertical"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -8481,6 +8481,10 @@
 	(no_connect
 		(at 154.94 139.7)
 		(uuid "42f141fb-c497-4bd5-bcc0-53884328621d")
+	)
+	(no_connect
+		(at 195.58 46.99)
+		(uuid "4b968460-ba03-4791-a5d0-3595b75ce0f5")
 	)
 	(no_connect
 		(at 204.47 36.83)
@@ -9333,7 +9337,7 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 46.99) (xy 202.2359 46.99)
+			(xy 186.69 46.99) (xy 195.58 46.99)
 		)
 		(stroke
 			(width 0.1524)
@@ -11616,8 +11620,8 @@
 		)
 		(uuid "33fdef09-4380-4e5a-8405-c1221f6b87e2")
 	)
-	(label "D6-1Wire"
-		(at 202.2359 46.99 180)
+	(label "D6"
+		(at 195.58 46.99 180)
 		(effects
 			(font
 				(size 1.2446 1.2446)
@@ -11956,7 +11960,7 @@
 		)
 		(uuid "a4a78f0d-8534-4d08-9a87-539a12770967")
 	)
-	(label "D6-1Wire"
+	(label "D17-1Wire"
 		(at 36.83 182.88 180)
 		(effects
 			(font
@@ -12137,12 +12141,12 @@
 		(uuid "da5c815f-9fe1-470e-aae7-ebcd1456f56b")
 	)
 	(label "A0-VIN"
-		(at 74.93 41.91 0)
+		(at 81.28 41.91 180)
 		(effects
 			(font
 				(size 1.2446 1.2446)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "dcb9f734-3efc-4192-87b0-6ad305d1645f")
 	)
@@ -12286,7 +12290,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "01c24522-30f9-4183-b984-b849d376d300")
-		(property "Reference" "R17"
+		(property "Reference" "R4"
 			(at 218.44 57.15 0)
 			(show_name no)
 			(do_not_autoplace yes)
@@ -12350,7 +12354,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R17")
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -13909,7 +13913,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "31553f22-3516-4ce7-9da2-5623cebcc557")
-		(property "Reference" "R22"
+		(property "Reference" "R10"
 			(at 40.64 187.96 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13995,7 +13999,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R22")
+					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -14013,7 +14017,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "392c064c-449d-4511-bea1-1b19d30c48f9")
-		(property "Reference" "R16"
+		(property "Reference" "R5"
 			(at 218.44 64.77 0)
 			(show_name no)
 			(do_not_autoplace yes)
@@ -14077,7 +14081,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R16")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -14218,7 +14222,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3dc8dc8c-5387-48f8-8599-383315600b68")
-		(property "Reference" "D1"
+		(property "Reference" "D2"
 			(at 256.794 94.996 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14336,7 +14340,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "D1")
+					(reference "D2")
 					(unit 1)
 				)
 			)
@@ -14513,7 +14517,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "472152ca-9a2f-482b-8750-3b2b3a8929f4")
-		(property "Reference" "R20"
+		(property "Reference" "R8"
 			(at 203.2 137.16 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14599,7 +14603,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R20")
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -15196,146 +15200,6 @@
 		)
 	)
 	(symbol
-		(lib_id "symbols:TB_2pos_vertical")
-		(at 257.81 82.55 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "5aa43112-7184-49d5-a1d1-e5565b8161c1")
-		(property "Reference" "J5"
-			(at 256.032 78.232 90)
-			(show_name no)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1.5 1.5)
-					(thickness 0.254)
-					(bold yes)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "5mm"
-			(at 259.334 82.55 0)
-			(show_name no)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "Footprint" "footprints:TERMINAL_BLOCK_1x02V_5mm"
-			(at 257.81 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-			)
-		)
-		(property "Datasheet" "https://www.cuidevices.com/product/resource/digikeypdf/tbp04r2-500.pdf"
-			(at 257.81 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.197\" (5.00mm) Vertical Through Hole"
-			(at 257.81 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" "12.00mm"
-			(at 257.81 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-			)
-		)
-		(property "MANUFACTURER" "CUI Devices"
-			(at 257.81 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-			)
-		)
-		(property "MPN" "TBP04R2-500-02BE"
-			(at 261.874 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace yes)
-			(effects
-				(font
-					(size 1 1)
-				)
-			)
-		)
-		(property "DigiKey" "2223-TBP04R2-500-02BE-ND"
-			(at 257.81 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "DigiKeyURL" "https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/TBP04R2-500-02BE/15775681"
-			(at 257.81 82.55 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "6a05e1f2-df7c-48fa-bb87-f70c1bfad0bd")
-		)
-		(pin "2"
-			(uuid "54e15b11-0256-4817-b044-f9df53fd92bb")
-		)
-		(instances
-			(project "lablogger_board"
-				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "J5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "symbols:TB_3pos_vertical")
 		(at 60.96 182.88 0)
 		(unit 1)
@@ -15789,7 +15653,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "664589af-00e1-4d96-9df3-995750474189")
-		(property "Reference" "D2"
+		(property "Reference" "D1"
 			(at 127 31.75 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15907,7 +15771,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "D2")
+					(reference "D1")
 					(unit 1)
 				)
 			)
@@ -16048,6 +15912,28 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
+			(at 67.31 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "JLCPCB" "C17902"
+			(at 67.31 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "JLCPCBURL" "https://jlcpcb.com/partdetail/18590-1206W4F1002T5E/C17902"
 			(at 67.31 82.55 0)
 			(hide yes)
 			(show_name no)
@@ -17116,6 +17002,28 @@
 				)
 			)
 		)
+		(property "JLCPCB" "C1591"
+			(at 100.33 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "JLCPCBURL" "https://jlcpcb.com/partdetail/1943-CL10B104KB8NNNC/C1591"
+			(at 100.33 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c595c850-e657-4db1-8db0-cb2e9da1132e")
 		)
@@ -17225,7 +17133,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "879c6272-b3ed-477f-ab41-081a49af501b")
-		(property "Reference" "R15"
+		(property "Reference" "R7"
 			(at 213.36 102.87 0)
 			(show_name no)
 			(do_not_autoplace yes)
@@ -17289,7 +17197,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R15")
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -17765,7 +17673,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "b3ca7d97-ab7d-443f-814c-4bd06fac8c6d")
-		(property "Reference" "R23"
+		(property "Reference" "R15"
 			(at 104.14 167.64 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17851,7 +17759,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R23")
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -18103,7 +18011,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ba61fb4c-0e41-4cb2-a3c0-d05170d74a24")
-		(property "Reference" "R19"
+		(property "Reference" "R6"
 			(at 203.2 92.71 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18189,7 +18097,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R19")
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -18899,7 +18807,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d1d12042-9e40-4e54-a022-b2655b85e78b")
-		(property "Reference" "Q5"
+		(property "Reference" "Q1"
 			(at 216.408 102.362 0)
 			(show_name no)
 			(do_not_autoplace yes)
@@ -19022,7 +18930,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "Q5")
+					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -19130,7 +19038,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e4692516-e19e-472c-a90e-4b9942e1bb84")
-		(property "Reference" "R21"
+		(property "Reference" "R9"
 			(at 213.36 147.32 0)
 			(show_name no)
 			(do_not_autoplace yes)
@@ -19194,7 +19102,147 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R21")
+					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "symbols:TB_2pos_vertical")
+		(at 257.81 82.55 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e79393e0-83b9-4094-9167-b5a10efbfddf")
+		(property "Reference" "J5"
+			(at 252.984 80.264 90)
+			(show_name no)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1.5 1.5)
+					(thickness 0.254)
+					(bold yes)
+				)
+				(justify right top)
+			)
+		)
+		(property "Value" "5mm"
+			(at 259.334 82.55 0)
+			(show_name no)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "Footprint" "footprints:TERMINAL_BLOCK_1x02_5mm_vertical"
+			(at 257.81 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Datasheet" "https://www.cuidevices.com/product/resource/digikeypdf/tbp04r2-500.pdf"
+			(at 257.81 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "2 Position Terminal Block Header, Male Pins, Shrouded (4 Side) 0.197\" (5.00mm) Vertical Through Hole"
+			(at 257.81 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" "12.00mm"
+			(at 257.81 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "MANUFACTURER" "CUI Devices"
+			(at 257.81 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "MPN" "TBP04R2-500-02BE"
+			(at 261.874 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1 1)
+				)
+			)
+		)
+		(property "DigiKey" "2223-TBP04R2-500-02BE-ND"
+			(at 257.81 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "DigiKeyURL" "https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices/TBP04R2-500-02BE/15775681"
+			(at 257.81 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7e4978fc-edd2-4b96-b4ff-670cf03c668b")
+		)
+		(pin "2"
+			(uuid "7a19e7df-fd7e-47c2-9335-67fe2fc5a107")
+		)
+		(instances
+			(project "lablogger_board"
+				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
+					(reference "J5")
 					(unit 1)
 				)
 			)
@@ -19430,7 +19478,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ee4e139a-de8a-4c64-a7e1-08f9f585666f")
-		(property "Reference" "R7"
+		(property "Reference" "R3"
 			(at 118.11 46.99 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19494,7 +19542,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "R7")
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -19666,7 +19714,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f7aabb4d-f170-49ab-9a47-8e556c7b6013")
-		(property "Reference" "Q6"
+		(property "Reference" "Q2"
 			(at 216.408 146.812 0)
 			(show_name no)
 			(do_not_autoplace yes)
@@ -19789,7 +19837,7 @@
 		(instances
 			(project "lablogger_board"
 				(path "/ba44af6b-d897-4c95-8815-b8860eb38091"
-					(reference "Q6")
+					(reference "Q2")
 					(unit 1)
 				)
 			)
@@ -19828,7 +19876,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:Fuse_1812"
+		(property "Footprint" "footprints:Fuse_2920_7451"
 			(at 46.99 21.59 0)
 			(hide yes)
 			(show_name no)

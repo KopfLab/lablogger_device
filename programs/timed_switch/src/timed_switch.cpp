@@ -2,244 +2,152 @@
 #include "uTypedef.h"
 #include "uCoreEnums.h"
 #include "uMultask.h"
+#include "uHardwareLablogger.h"
+#include "uHardwarePwmOutput.h"
+#include "uComponentTimedSwitch.h"
+#include "symbols.h"
 
-// Relay via ouput pin with PWM
-class TtimedSwitch : public TmenuHandle
+// hardware
+class ThardwareTimedDoubleSwitch : public ThardwareLablogger
 {
-
 public:
-    // sdds enums
-    using TonOff = sdds::enums::OnOff;
-    sdds_enum(___, on, off, schedule) Taction;
-    sdds_enum(on, off, schedule, noPin) Tstate;
-
     // sdds vars
-    sdds_var(Taction, action);
-    sdds_var(Tstate, state, sdds_joinOpt(sdds::opt::saveval, sdds::opt::readonly), Tstate::noPin);
-    sdds_var(Tint8, pin, sdds::opt::readonly, -1);
-    sdds_var(Tuint8, intensity_percent, sdds::opt::saveval, 100);
-    sdds_var(Tuint32, scheduleOn_sec, sdds::opt::saveval, 60 * 60 * 12);  // 12 hours on
-    sdds_var(Tuint32, scheduleOff_sec, sdds::opt::saveval, 60 * 60 * 12); // 12 hours off
-    sdds_var(Tuint16, scheduleOnStart_HHMM, sdds::opt::saveval, 1200);
-    sdds_var(Tstring, scheduleInfo, sdds::opt::readonly);
+    sdds_var(ThardwarePwmOutput, switch1);
+    sdds_var(ThardwarePwmOutput, switch2);
 
-private:
-    // schedule timer
-    Ttimer FscheduleTimer;
-
-    // schedule structure
-    struct Schedule
+    // constructor
+    ThardwareTimedDoubleSwitch()
     {
-        bool isOn;
-        uint32_t secondsToSwitch;
-        uint8_t h, m, s;
-    };
-
-    Schedule calculateSchedule()
-    {
-        // schedule object
-        Schedule r{false, 0, 0, 0, 0};
-
-        // do we have a valid time?
-        if (!Time.isValid())
-            return r;
-
-        // figure out how much time has past since the start (today or yesterday)
-        const uint16_t start_hour = scheduleOnStart_HHMM.value() / 100;
-        const uint16_t start_min = scheduleOnStart_HHMM.value() % 100;
-        const uint32_t start_sec = start_hour * 60 * 60 + start_min * 60;
-        const uint32_t now_sec = static_cast<uint32_t>(Time.hour()) * 3600 + Time.minute() * 60 + Time.second();
-        const uint32_t delta = (start_sec > now_sec) ? 24 * 60 * 60 + now_sec - start_sec : now_sec - start_sec;
-
-        // figure out which phase we are in and when the next phase starts
-        const uint32_t period = scheduleOn_sec.value() + scheduleOff_sec.value();
-        const uint32_t phase = delta % period;
-        if (phase < scheduleOn_sec.value())
-        {
-            r.isOn = true;
-            r.secondsToSwitch = scheduleOn_sec.value() - phase; // ON -> OFF
-        }
-        else
-        {
-            r.isOn = false;
-            r.secondsToSwitch = period - phase; // OFF -> ON
-        }
-
-        // determine time to next in H:M:S
-        uint32_t t = r.secondsToSwitch;
-        r.h = (uint8_t)(t / 3600);
-        t %= 3600;
-        r.m = (uint8_t)(t / 60);
-        r.s = (uint8_t)(t % 60);
-        return r;
-    }
-
-    // update with current light state
-    void update()
-    {
-        update(state);
-    }
-
-    // update hardware based on settings
-    void update(Tstate::e _lightState)
-    {
-        // nothing happens if there's no pin defined
-        if (state == Tstate::noPin)
-            return;
-
-        // light
-        bool light = false;
-        if (_lightState == Tstate::off)
-        {
-            // off
-            if (scheduleInfo != "")
-                scheduleInfo = "";
-        }
-        else if (_lightState == Tstate::on)
-        {
-            // on
-            light = true;
-            if (scheduleInfo != "")
-                scheduleInfo = "";
-        }
-        else if (_lightState == Tstate::schedule)
-        {
-            // schedule
-            if (!Time.isValid())
-            {
-                // don't have valid time yet - keep off and reschedule check
-                if (scheduleInfo != "pending")
-                    scheduleInfo = "pending";
-                FscheduleTimer.start(1000);
-            }
-            else
-            {
-
-                // determine schedule
-                Schedule s = calculateSchedule();
-                light = s.isOn;
-                const dtypes::string next = (s.isOn) ? "off:" : "on:";
-
-                // when to scheck back in?
-                if (s.h == 0 && s.m == 0)
-                {
-                    scheduleInfo = next + dtypes::string(s.s) + "s";
-                    FscheduleTimer.start(1000); // once a second
-                }
-                else if (s.h == 0)
-                {
-                    scheduleInfo = next + dtypes::string(s.m) + "m" + dtypes::string(s.s) + "s";
-                    FscheduleTimer.start(1000); // once a second
-                }
-                else
-                {
-                    scheduleInfo = next + dtypes::string(s.h) + "h" + dtypes::string(s.m) + "m";
-                    FscheduleTimer.start((s.s + 1) * 1000); // once we're down a minute
-                }
-            }
-        }
-
-        // update light
-        int pwm = intensity_percent * 255 / 100;
-        (light) ? analogWrite(pin.value(), pwm) : analogWrite(pin.value(), 0);
-    }
-
-public:
-    TtimedSwitch()
-    {
-        // setup
+        // run during setup
         on(sdds::setup())
         {
-            if (pin > -1)
-            {
-                pinMode(pin.value(), OUTPUT);
-                state = Tstate::off;
-            }
-            else
-                state = Tstate::noPin;
-        };
-
-        // timer
-        on(FscheduleTimer)
-        {
-            update();
-        };
-
-        // light action events
-        on(action)
-        {
-            // stop if no action
-            if (action == Taction::___)
-                return;
-
-            if (state == Tstate::noPin)
-            {
-                // nothing happens --> no pin defined
-            }
-            // process actions
-            else if (action == Taction::on)
-            {
-                state = Tstate::on;
-                update();
-            }
-            else if (action == Taction::off)
-            {
-                state = Tstate::off;
-                update();
-            }
-            else if (action == Taction::schedule)
-            {
-                state = Tstate::schedule;
-                update();
-            }
-
-            // reset action
-            action = Taction::___;
-        };
-
-        // change light intensity
-        on(intensity_percent)
-        {
-            if (intensity_percent == 0)
-                intensity_percent = 1;
-            else if (intensity_percent > 100)
-                intensity_percent = 100;
-            else
-                update();
-        };
-
-        // schedule
-        on(scheduleOn_sec)
-        {
-            if (scheduleOn_sec == 0)
-                scheduleOn_sec = 1;
-            else
-                update();
-        };
-        on(scheduleOff_sec)
-        {
-            if (scheduleOff_sec == 0)
-                scheduleOff_sec = 1;
-            else
-                update();
-        };
-        on(scheduleOnStart_HHMM)
-        {
-            if (scheduleOnStart_HHMM > 2359)
-                scheduleOnStart_HHMM = 0;
-            else
-                update();
+            // define pins for switches
+            switch1.init(A2);
+            switch2.init(A5);
         };
     }
 };
 
+// FIXME: continue here
+
+/**
+ * @brief get the static hadware instance
+ */
+ThardwareTimedDoubleSwitch &hardware()
+{
+    static ThardwareTimedDoubleSwitch hardware;
+    return hardware;
+}
+
 // self-describing data structure (SDDS) tree
 class TsddsTree : public TmenuHandle
 {
+private:
+    // timers
+    Ttimer FdisplayTimer;
+
+    // display update function
+    void refreshDisplay()
+    {
+        hardware().display.clearDisplay();
+        hardware().display.setCursor(0, 0);
+        char buf[16]; // snprintf buffer
+
+        // wifi?
+        if (particleSystem().internet == TparticleSystem::TinternetStatus::connected)
+            hardware().display.drawIcon(wifi_icon, wifi_icon_width);
+        else
+            hardware().display.drawIcon(no_wifi_icon, no_wifi_icon_width);
+
+        // publishing? (don't show the "not publishing", it's not as informative)
+        if (particleSystem().publishing.record == sdds::enums::OnOff::ON)
+            hardware().display.drawIcon(publishing_icon, publishing_icon_width);
+
+        // device name
+        if (particleSystem().name == "")
+            hardware().display.printLine(ThardwareDisplay::headerY, "connecting...");
+        else
+            hardware().display.printLine(ThardwareDisplay::headerY, particleSystem().name);
+
+        // power
+        snprintf(buf, sizeof(buf), "%.1fV", hardware().voltage.value.value());
+        hardware().display.printLine(ThardwareDisplay::line1Y, "Power:");
+        hardware().display.printLine(ThardwareDisplay::line1Y, buf, ThardwareDisplay::offsetX);
+
+        // switch1 status
+        hardware().display.printLine(ThardwareDisplay::line2Y, "Switch #1:");
+        if (timedSwitch1.status == TcomponentTimedSwitch::Tstatus::on)
+            hardware().display.printLine(ThardwareDisplay::line2Y, timedSwitch1.intensity_percent.to_string() + "%", ThardwareDisplay::offsetX);
+        else if (timedSwitch1.status == TcomponentTimedSwitch::Tstatus::off)
+            hardware().display.printLine(ThardwareDisplay::line2Y, "off", ThardwareDisplay::offsetX);
+        else
+            hardware().display.printLine(ThardwareDisplay::line2Y, timedSwitch1.status.to_string(), ThardwareDisplay::offsetX);
+
+        // switch1 state
+        if (timedSwitch1.state == TcomponentTimedSwitch::Tstate::on)
+            hardware().display.printLine(ThardwareDisplay::line3Y, "always on", ThardwareDisplay::offsetX);
+        else if (timedSwitch1.state == TcomponentTimedSwitch::Tstate::off)
+            hardware().display.printLine(ThardwareDisplay::line3Y, "always off", ThardwareDisplay::offsetX);
+        else if (timedSwitch1.state == TcomponentTimedSwitch::Tstate::schedule)
+            hardware().display.printLine(ThardwareDisplay::line3Y, timedSwitch1.scheduleInfo.c_str(), ThardwareDisplay::offsetX);
+
+        // switch2 status
+        hardware().display.printLine(ThardwareDisplay::line2Y, "Switch #2:");
+        if (timedSwitch2.status == TcomponentTimedSwitch::Tstatus::on)
+            hardware().display.printLine(ThardwareDisplay::line2Y, timedSwitch2.intensity_percent.to_string() + "%", ThardwareDisplay::offsetX);
+        else if (timedSwitch2.status == TcomponentTimedSwitch::Tstatus::off)
+            hardware().display.printLine(ThardwareDisplay::line2Y, "off", ThardwareDisplay::offsetX);
+        else
+            hardware().display.printLine(ThardwareDisplay::line2Y, timedSwitch2.status.to_string(), ThardwareDisplay::offsetX);
+
+        // switch2 state
+        if (timedSwitch2.state == TcomponentTimedSwitch::Tstate::on)
+            hardware().display.printLine(ThardwareDisplay::line3Y, "always on", ThardwareDisplay::offsetX);
+        else if (timedSwitch2.state == TcomponentTimedSwitch::Tstate::off)
+            hardware().display.printLine(ThardwareDisplay::line3Y, "always off", ThardwareDisplay::offsetX);
+        else if (timedSwitch2.state == TcomponentTimedSwitch::Tstate::schedule)
+            hardware().display.printLine(ThardwareDisplay::line3Y, timedSwitch2.scheduleInfo.c_str(), ThardwareDisplay::offsetX);
+
+        // update dispaly
+        hardware().display.drawLayoutLines();
+    }
+
 public:
-    sdds_var(TtimedSwitch, timedSwitch1);
-    sdds_var(TtimedSwitch, timedSwitch2);
-    TsddsTree() {}
+    // sdds vars
+    sdds_var(TcomponentTimedSwitch, timedSwitch1);
+    sdds_var(TcomponentTimedSwitch, timedSwitch2);
+
+    // constructor
+    TsddsTree()
+    {
+        // make sure hardware is initalized
+        hardware();
+
+        // run during setup
+        on(sdds::setup())
+        {
+            // set the hardware for the timed switch
+            timedSwitch1.setPwmOutput(&hardware().switch1);
+            timedSwitch2.setPwmOutput(&hardware().switch2);
+        };
+
+        // display startup complete
+        on(hardware().display.startup)
+        {
+            if (hardware().display.startup == ThardwareDisplay::Tstartup::complete)
+            {
+                FdisplayTimer.start(0);
+            }
+        };
+
+        // regular display refresh
+        on(FdisplayTimer)
+        {
+            refreshDisplay();
+            hardware().display.action = ThardwareDisplay::Taction::write;
+            FdisplayTimer.start(hardware().display.refresh_ms);
+        };
+    }
 } sddsTree;
 
 // serial spike for communication via serial (with baud rate)
@@ -248,18 +156,16 @@ TserialSpike serialSpike(sddsTree, 115200);
 
 // particle spike for particle communication (with sdds name and version)
 #include "uParticleSpike.h"
-static TparticleSpike particleSpike(sddsTree, "timedSwitch", 102);
+static TparticleSpike particleSpike(sddsTree, "timed switch (x2)", 103);
 
 // setup
 void setup()
 {
-
-    // define pins for the 2 timed switches
-    sddsTree.timedSwitch1.pin = A2;
-    sddsTree.timedSwitch2.pin = A5;
-
     // setup particle spike
     particleSpike.setup();
+
+    // add hardware menu after the particle spike so it does not have publish options
+    sddsTree.addDescr(hardware());
 }
 
 // loop

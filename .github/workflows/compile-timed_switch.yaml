@@ -18,7 +18,9 @@ jobs:
         # CHANGE program and specify lib/aux and non-default src as needed
         program:
           - name: 'timed_switch'
-            lib: 'SDDS SDDS_particleSpike'
+            src: 'src'
+            lib: 'SDDS SDDS_particleSpike Adafruit_BusIO'
+            aux: 'lib/Adafruit_GFX/src/Adafruit_GFX.h lib/Adafruit_GFX/src/Adafruit_GFX.cpp lib/Adafruit_GFX/src/gfxfont.h lib/Adafruit_GFX/src/glcdfont.c lib/Adafruit_SSD1306/src/Adafruit_SSD1306.h lib/Adafruit_SSD1306/src/Adafruit_SSD1306.cpp'
         # CHANGE platforms as needed
         platform:
           - {name: 'p2', version: '6.3.4'}

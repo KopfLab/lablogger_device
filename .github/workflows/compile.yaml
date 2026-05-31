@@ -2,7 +2,7 @@ name: Base workflow for compile
 
 env:
   # default program root and src folders
-  DEFAULT_PROGRAM_ROOT: examples/
+  DEFAULT_PROGRAM_ROOT: programs/
   DEFAULT_PROGRAM_SRC: /src
 
 on:

@@ -9,12 +9,12 @@ public:
     // sdds enums
     sdds_enum(___, on, off, schedule) Taction;
     sdds_enum(on, off, schedule) Tstate;
-    sdds_enum(on, off, error, undefOutput) Tstatus;
+    sdds_enum(on, off, error, undef) Tstatus;
 
     // sdds vars
     sdds_var(Taction, action);
     sdds_var(Tstate, state, sdds_joinOpt(sdds::opt::saveval, sdds::opt::readonly), Tstate::off);
-    sdds_var(Tstatus, status, sdds::opt::readonly, Tstatus::undefOutput);
+    sdds_var(Tstatus, status, sdds::opt::readonly, Tstatus::undef);
     sdds_var(Tuint8, intensity_percent, sdds::opt::saveval, 100);
     sdds_var(Tuint32, scheduleOn_sec, sdds::opt::saveval, 60 * 60 * 12);  // 12 hours on
     sdds_var(Tuint32, scheduleOff_sec, sdds::opt::saveval, 60 * 60 * 12); // 12 hours off
@@ -157,7 +157,7 @@ public:
     // set hardware
     void setPwmOutput(ThardwarePwmOutput *_output)
     {
-        if (!_output)
+        if (_output)
         {
             FpwmOutput = _output;
             // update switch status from hardware
@@ -168,6 +168,7 @@ public:
                 else if (FpwmOutput->state == enums::ToffOn::off && status != Tstatus::off)
                     status = Tstatus::off;
             };
+            FpwmOutput->state.signalEvents();
         }
     }
 

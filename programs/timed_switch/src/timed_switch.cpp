@@ -92,21 +92,21 @@ private:
             hardware().display.printLine(ThardwareDisplay::line3Y, timedSwitch1.scheduleInfo.c_str(), ThardwareDisplay::offsetX);
 
         // switch2 status
-        hardware().display.printLine(ThardwareDisplay::line2Y, "Switch #2:");
+        hardware().display.printLine(ThardwareDisplay::line4Y, "Switch #2:");
         if (timedSwitch2.status == TcomponentTimedSwitch::Tstatus::on)
-            hardware().display.printLine(ThardwareDisplay::line2Y, timedSwitch2.intensity_percent.to_string() + "%", ThardwareDisplay::offsetX);
+            hardware().display.printLine(ThardwareDisplay::line4Y, timedSwitch2.intensity_percent.to_string() + "%", ThardwareDisplay::offsetX);
         else if (timedSwitch2.status == TcomponentTimedSwitch::Tstatus::off)
-            hardware().display.printLine(ThardwareDisplay::line2Y, "off", ThardwareDisplay::offsetX);
+            hardware().display.printLine(ThardwareDisplay::line4Y, "off", ThardwareDisplay::offsetX);
         else
-            hardware().display.printLine(ThardwareDisplay::line2Y, timedSwitch2.status.to_string(), ThardwareDisplay::offsetX);
+            hardware().display.printLine(ThardwareDisplay::line4Y, timedSwitch2.status.to_string(), ThardwareDisplay::offsetX);
 
         // switch2 state
         if (timedSwitch2.state == TcomponentTimedSwitch::Tstate::on)
-            hardware().display.printLine(ThardwareDisplay::line3Y, "always on", ThardwareDisplay::offsetX);
+            hardware().display.printLine(ThardwareDisplay::line5Y, "always on", ThardwareDisplay::offsetX);
         else if (timedSwitch2.state == TcomponentTimedSwitch::Tstate::off)
-            hardware().display.printLine(ThardwareDisplay::line3Y, "always off", ThardwareDisplay::offsetX);
+            hardware().display.printLine(ThardwareDisplay::line5Y, "always off", ThardwareDisplay::offsetX);
         else if (timedSwitch2.state == TcomponentTimedSwitch::Tstate::schedule)
-            hardware().display.printLine(ThardwareDisplay::line3Y, timedSwitch2.scheduleInfo.c_str(), ThardwareDisplay::offsetX);
+            hardware().display.printLine(ThardwareDisplay::line5Y, timedSwitch2.scheduleInfo.c_str(), ThardwareDisplay::offsetX);
 
         // update dispaly
         hardware().display.drawLayoutLines();

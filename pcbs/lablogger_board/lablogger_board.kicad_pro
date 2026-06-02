@@ -54,20 +54,7 @@
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [
-        [
-          "courtyards_overlap|159631000|103625400|8eb66302-864c-4ff2-b93c-c4e1f759afde|af3f1bad-9fa7-47b4-ada3-dd8ac94888e7",
-          ""
-        ],
-        [
-          "courtyards_overlap|159631000|114586735|af3f1bad-9fa7-47b4-ada3-dd8ac94888e7|ec74ba38-3b2b-43f0-b66b-e68018071a75",
-          ""
-        ],
-        [
-          "courtyards_overlap|159631000|95812300|292b7f59-c905-4bed-9954-400e7019d977|8eb66302-864c-4ff2-b93c-c4e1f759afde",
-          ""
-        ]
-      ],
+      "drc_exclusions": [],
       "meta": {
         "filename": "board_design_settings.json",
         "version": 2
@@ -465,7 +452,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "ignore",
       "same_local_global_label": "warning",
       "similar_label_and_power": "warning",
@@ -672,7 +659,7 @@
   ],
   "text_variables": {
     "PROJ_AUTHOR": "Sebastian Kopf",
-    "PROJ_REV": "0.2",
+    "PROJ_REV": "0.3",
     "PROJ_TITLE": "labLogger Board"
   },
   "tuning_profiles": {

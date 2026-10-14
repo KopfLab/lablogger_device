@@ -21,14 +21,13 @@ $screw_threadable_tolerance = 0; // tolerance for screw holes that can be thread
 //  - display + board height: 4.0mm
 //  - standoff: 28.0 mm
 //  - pcb: 1.6mm
-//  - standoffs: 12mm (has to be M3, M2.5 doesn't have this length)
+//  - standoffs: 8mm
 //  - back wall: 4.0 mm
-//  total: 50.6
-//  - barrel jack: 12.4mm from board to wall
-// --> indent the plug by 0.4 mm
-//  - RJ45: 16.2mm from board to plug --> should work well with 12mm standoff
+//  total: 46.6
+//  - barrel jack: 12.4mm (reaches from board through wall to the outside)
+//  - switch plugs: 12mm (reaches from board through wall to the outside)
 
-$box_size = [85, 58, 50.6]; //$box_size = [85, 58, 50];
+$box_size = [85, 58, 46.6]; 
 $box_wall_thickness = 2; // thickness of the box walls
 $box_front_thickness = 4; // front thickness
 $box_corner_radius = 3; // radius of the corners
@@ -300,5 +299,5 @@ module module_controller_magnet_holder() {
 //module_controller_front();
 // translate([0, 0, $box_size[2] + 5])
 // rotate([180, 0, 0])
-module_controller_back();
-//module_controller_magnet_holder();
+//module_controller_back();
+module_controller_magnet_holder();

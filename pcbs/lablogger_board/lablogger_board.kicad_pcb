@@ -57,7 +57,7 @@
 		(filling no)
 		(pcbplotparams
 			(layerselection 0x00000000_00000000_55555555_555555d0)
-			(plot_on_all_layers_selection 0x00000000_00000000_0000000a_0200aaaf)
+			(plot_on_all_layers_selection 0x00000000_00000000_0000000a_0202aaaf)
 			(disableapertmacros no)
 			(usegerberextensions no)
 			(usegerberattributes yes)
